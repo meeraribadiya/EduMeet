@@ -199,23 +199,9 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { renderNavbar } from '../../assets/js/utils.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyB49ZsoYZR0KxIFqzEj5aBAXMqQKznK3Bg",
-            authDomain: "student-teacher-booking-bb81a.firebaseapp.com",
-            projectId: "student-teacher-booking-bb81a",
-            storageBucket: "student-teacher-booking-bb81a.appspot.com",
-            messagingSenderId: "537650428593",
-            appId: "1:537650428593:web:d0e5a2310abf7748c7c090"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
+        import { onSnapshot, collection, doc, updateDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { renderNavbar, db, auth } from '../../assets/js/utils.js';
 
         renderNavbar();
 
