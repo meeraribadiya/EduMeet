@@ -71,7 +71,7 @@ EduMeet provides a centralized platform for educational institutions to manage s
 ### 2. Setup
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/USERNAME/Student-Teacher_Booking-Appointment.git
+   git clone https://github.com/meeraribadiya/EduMeet
 
    ```
 2. **Navigate to project directory:**
