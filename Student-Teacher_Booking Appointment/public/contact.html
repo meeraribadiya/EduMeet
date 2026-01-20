@@ -50,23 +50,8 @@
     </div>
   </main>
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    import { renderNavbar, getCurrentUser } from 'assets/js/utils.js';
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB49ZsoYZR0KxIFqzEj5aBAXMqQKznK3Bg",
-      authDomain: "student-teacher-booking-bb81a.firebaseapp.com",
-      projectId: "student-teacher-booking-bb81a",
-      storageBucket: "student-teacher-booking-bb81a.appspot.com",
-      messagingSenderId: "537650428593",
-      appId: "1:537650428593:web:d0e5a2310abf7748c7c090"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { renderNavbar, getCurrentUser, db } from './assets/js/utils.js';
 
     // Auto-fill form if user is logged in
     const user = getCurrentUser();
