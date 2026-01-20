@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Teachers - Admin - EduBook</title>
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <script type="module" src="../../assets/js/utils.js"></script>
+</head>
+
+<body>
+  <div id="navbar-container"></div>
+  <main class="container" style="padding: 2rem 0;">
+    <header class="flex justify-between items-center mb-4">
+      <h1>Manage Teachers</h1>
+      <div class="flex gap-2 btn-group">
+        <a href="add-teacher.html" class="btn btn-primary">Add Teacher</a>
+        <a href="admin.html" class="btn btn-secondary">Admin Dashboard</a>
+      </div>
+    </header>
+    <div class="card">
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border-color); text-align:left;">
+              <th class="p-4">Name</th>
+              <th class="p-4">Email</th>
+              <th class="p-4">Department</th>
+              <th class="p-4">Subject</th>
+              <th class="p-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, query, where, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { renderNavbar, requireAuth } from '../../assets/js/utils.js';
+
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyB49ZsoYZR0KxIFqzEj5aBAXMqQKznK3Bg",
+      authDomain: "student-teacher-booking-bb81a.firebaseapp.com",
+      projectId: "student-teacher-booking-bb81a",
+      storageBucket: "student-teacher-booking-bb81a.appspot.com",
+      messagingSenderId: "537650428593",
+      appId: "1:537650428593:web:d0e5a2310abf7748c7c090"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    requireAuth('admin');
+
+
+    const tbody = document.getElementById('tbody');
+
+    // Load Teachers in Real-time from Firestore
+    function loadTeachers() {
+      // Query: users collection se sirf unhe nikalo jinka role 'teacher' hai
+      const q = query(collection(db, "users"), where("role", "==", "teacher"));
+
+      onSnapshot(q, (snapshot) => {
+        if (snapshot.empty) {
+          tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center">No teachers found in database.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = snapshot.docs.map(docSnap => {
+          const t = docSnap.data();
+          const id = docSnap.id;
+          return `
+                    <tr style="border-bottom:1px solid var(--border-color);">
+                        <td class="p-4"><strong>${t.name}</strong></td>
+                        <td class="p-4">${t.email}</td>
+                        <td class="p-4">${t.department || 'N/A'}</td>
+                        <td class="p-4">${t.subject || 'N/A'}</td>
+                        <td class="p-4">
+                            <button class="btn btn-secondary delete-btn" 
+                                    style="color: #e74c3c; border-color: #e74c3c;" 
+                                    data-id="${id}">Delete</button>
+                        </td>
+                    </tr>
+                `;
+        }).join('');
+
+        // Add Event Listeners to Delete Buttons
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.onclick = async () => {
+            const teacherId = btn.getAttribute('data-id');
+            if (confirm('Are you sure you want to delete this teacher?')) {
+              try {
+                await deleteDoc(doc(db, "users", teacherId));
+                alert('Teacher deleted successfully!');
+              } catch (error) {
+                console.error("Error deleting:", error);
+                alert('Failed to delete teacher.');
+              }
+            }
+          };
+        });
+      });
+    }
+
+    loadTeachers();
+  </script>
+</body>
+
+</html>
