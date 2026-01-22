@@ -3,17 +3,17 @@
 
 **EduMeet** is a modern, responsive web application designed to bridge the gap between students and teachers through an intuitive appointment scheduling interface. 
 
----
+
 
 ##  Live Demo
 Vercel: [edu-meet-gamma.vercel.app](https://edu-meet-gamma.vercel.app)
 
----
+
 
 ##  Project Overview
 EduMeet provides a centralized platform for educational institutions to manage student-teacher interactions. It simplifies the process of finding educators, checking their availability, and booking sessions, ensuring a seamless experience for both parties.
 
----
+
 
 ##  Technologies Used
 - **Frontend:** 
@@ -28,7 +28,7 @@ EduMeet provides a centralized platform for educational institutions to manage s
   - Firebase Hosting (Alternative)
 - **Typography:** Inter (via Google Fonts)
 
----
+
 
 ##  Features
 
@@ -53,14 +53,14 @@ EduMeet provides a centralized platform for educational institutions to manage s
 - **Instant Booking:** Choose an available slot and book appointments instantly.
 - **Appointment Tracking:** Monitor the status of requests (Pending, Approved, Completed).
 
----
+
 
 ##  Firebase Usage
 - **Real-time Synchronization:** Appointments and profile updates reflect instantly across dashboards.
 - **Scalable Database:** Firestore handles the complex relationships between students, teachers, and their schedules.
 - **Secure Auth:** Direct integration with Firebase Auth ensures user data protection.
 
----
+
 
 ##  How to Run Project
 
@@ -86,7 +86,7 @@ EduMeet provides a centralized platform for educational institutions to manage s
 - **Alternative:**
   - Use any simple static file server (e.g., `npx serve public`).
 
----
+
 
 ## 📂 Project Structure
 ```text
